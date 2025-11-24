@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olu Adegun - Software Engineer</title>
+    <title>Oluwaseyi Adegun - Software Engineer</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -13,6 +13,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
         }
         
         .gradient-bg {
@@ -32,7 +33,7 @@
         
         .card-hover:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.25);
         }
         
         .skill-badge {
@@ -175,20 +176,20 @@
             };
 
             return (
-                <div className="min-h-screen bg-gray-50">
+                <div className="min-h-screen bg-gray-900">
                     {/* Navigation */}
-                    <nav className="fixed top-0 w-full bg-white shadow-sm z-50">
+                    <nav className="fixed top-0 w-full bg-gray-800 shadow-sm z-50 border-b border-gray-700">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex justify-between items-center h-16">
                                 <div className="flex items-center">
-                                    <span className="text-xl font-bold gradient-text">Oluwaseyi Adegun </span>
+                                    <span className="text-xl font-bold gradient-text">Oluwaseyi Adegun</span>
                                 </div>
                                 <div className="hidden md:flex space-x-8">
-                                    <a href="#home" className="text-gray-700 hover:text-indigo-600 transition">Home</a>
-                                    <a href="#about" className="text-gray-700 hover:text-indigo-600 transition">About</a>
-                                    <a href="#projects" className="text-gray-700 hover:text-indigo-600 transition">Projects</a>
-                                    <a href="#skills" className="text-gray-700 hover:text-indigo-600 transition">Skills</a>
-                                    <a href="#contact" className="text-gray-700 hover:text-indigo-600 transition">Contact</a>
+                                    <a href="#home" className="text-gray-300 hover:text-indigo-400 transition">Home</a>
+                                    <a href="#about" className="text-gray-300 hover:text-indigo-400 transition">About</a>
+                                    <a href="#projects" className="text-gray-300 hover:text-indigo-400 transition">Projects</a>
+                                    <a href="#skills" className="text-gray-300 hover:text-indigo-400 transition">Skills</a>
+                                    <a href="#contact" className="text-gray-300 hover:text-indigo-400 transition">Contact</a>
                                 </div>
                             </div>
                         </div>
@@ -198,10 +199,10 @@
                     <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
                         <div className="max-w-6xl mx-auto">
                             <div className="text-center">
-                                <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-                                    Hi, I'm <span className="gradient-text">Olu </span>
+                                <h1 className="text-5xl md:text-6xl font-bold text-gray-100 mb-6">
+                                    Hi, I'm <span className="gradient-text">Olu</span>
                                 </h1>
-                                <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                                <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto">
                                     Third-year Computer Science student specializing in data infrastructure and cloud computing. I love building reliable systems.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -216,7 +217,7 @@
                                         href="https://github.com/ogadegun"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-8 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-900 transition shadow-lg"
+                                        className="inline-flex items-center gap-2 px-8 py-3 bg-gray-700 text-white font-medium rounded-lg hover:bg-gray-600 transition shadow-lg"
                                     >
                                         <GithubIcon />
                                         View GitHub
@@ -227,22 +228,22 @@
                     </section>
 
                     {/* About Section */}
-                    <section id="about" className="py-20 bg-white">
+                    <section id="about" className="py-20 bg-gray-800">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-4xl font-bold text-center mb-12 gradient-text">About Me</h2>
                             <div className="max-w-3xl mx-auto">
-                                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                                     I'm a Computer Science student at Memorial University of Newfoundland pursuing the 
                                     Data-centric Computing concentration. Currently applying for the co-op program with 
                                     an 8-month work term starting May 2026.
                                 </p>
-                                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                                     As Database Infrastructure Lead for the MUN Quantitative Finance Society, I manage 
                                     production-scale financial market data infrastructure that has grown to over 1 billion 
                                     rows across 13,000+ tickers. This involves coordinating with university research 
                                     computing staff and leading technical initiatives that serve 50+ society members.
                                 </p>
-                                <p className="text-lg text-gray-700 leading-relaxed">
+                                <p className="text-lg text-gray-300 leading-relaxed">
                                     I'm passionate about building scalable, reliable systems and solving complex data 
                                     infrastructure challenges. My experience spans cloud computing, database administration, 
                                     and full-stack development.
@@ -252,42 +253,42 @@
                     </section>
 
                     {/* Projects Section */}
-                    <section id="projects" className="py-20 bg-gray-50">
+                    <section id="projects" className="py-20 bg-gray-900">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-4xl font-bold text-center mb-4 gradient-text">Featured Projects</h2>
-                            <p className="text-center text-gray-600 mb-12 text-lg">
+                            <p className="text-center text-gray-400 mb-12 text-lg">
                                 Building production-grade systems with real-world impact
                             </p>
                             
                             <div className="space-y-8">
                                 {projects.map((project, idx) => (
-                                    <div key={project.id} className="bg-white rounded-xl shadow-md card-hover p-8">
+                                    <div key={project.id} className="bg-gray-800 rounded-xl shadow-md card-hover p-8 border border-gray-700">
                                         <div className="flex items-start gap-4 mb-4">
-                                            <div className="p-3 bg-indigo-100 rounded-lg text-indigo-600">
+                                            <div className="p-3 bg-indigo-900 rounded-lg text-indigo-400">
                                                 {project.icon}
                                             </div>
                                             <div className="flex-1">
-                                                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                                                <h3 className="text-2xl font-bold text-gray-100 mb-2">
                                                     {project.title}
                                                 </h3>
-                                                <p className="text-sm text-indigo-600 font-medium mb-3">
+                                                <p className="text-sm text-indigo-400 font-medium mb-3">
                                                     {project.role}
                                                 </p>
                                             </div>
                                         </div>
                                         
-                                        <p className="text-gray-700 mb-6 leading-relaxed">
+                                        <p className="text-gray-300 mb-6 leading-relaxed">
                                             {project.description}
                                         </p>
 
                                         {/* Metrics */}
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 p-4 bg-gray-900 rounded-lg border border-gray-700">
                                             {project.metrics.map((metric, i) => (
                                                 <div key={i} className="text-center">
-                                                    <div className="text-2xl font-bold text-indigo-600 stat-number">
+                                                    <div className="text-2xl font-bold text-indigo-400 stat-number">
                                                         {metric.value}
                                                     </div>
-                                                    <div className="text-xs text-gray-600 mt-1">
+                                                    <div className="text-xs text-gray-500 mt-1">
                                                         {metric.label}
                                                     </div>
                                                 </div>
@@ -296,11 +297,11 @@
 
                                         {/* Highlights */}
                                         <div className="mb-6">
-                                            <h4 className="font-semibold text-gray-900 mb-3">Key Achievements:</h4>
+                                            <h4 className="font-semibold text-gray-100 mb-3">Key Achievements:</h4>
                                             <ul className="space-y-2">
                                                 {project.highlights.map((highlight, i) => (
-                                                    <li key={i} className="flex items-start gap-2 text-gray-700">
-                                                        <span className="text-indigo-600 mt-1">•</span>
+                                                    <li key={i} className="flex items-start gap-2 text-gray-300">
+                                                        <span className="text-indigo-400 mt-1">•</span>
                                                         <span>{highlight}</span>
                                                     </li>
                                                 ))}
@@ -309,10 +310,10 @@
 
                                         {/* Tech Stack */}
                                         <div className="mb-4">
-                                            <h4 className="font-semibold text-gray-900 mb-3">Technologies:</h4>
+                                            <h4 className="font-semibold text-gray-100 mb-3">Technologies:</h4>
                                             <div className="flex flex-wrap gap-2">
                                                 {project.tech.map((tech, i) => (
-                                                    <span key={i} className="px-3 py-1 bg-indigo-50 text-indigo-700 text-sm rounded-full">
+                                                    <span key={i} className="px-3 py-1 bg-indigo-900 text-indigo-300 text-sm rounded-full">
                                                         {tech}
                                                     </span>
                                                 ))}
@@ -320,9 +321,9 @@
                                         </div>
 
                                         {/* Impact */}
-                                        <div className="p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-600">
-                                            <p className="text-gray-700">
-                                                <span className="font-semibold text-indigo-900">Impact: </span>
+                                        <div className="p-4 bg-indigo-900 bg-opacity-30 rounded-lg border-l-4 border-indigo-600">
+                                            <p className="text-gray-300">
+                                                <span className="font-semibold text-indigo-400">Impact: </span>
                                                 {project.impact}
                                             </p>
                                         </div>
@@ -334,7 +335,7 @@
                                                     href={project.github}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-800 font-medium transition"
+                                                    className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition"
                                                 >
                                                     <GithubIcon />
                                                     View on GitHub
@@ -349,20 +350,20 @@
                     </section>
 
                     {/* Skills Section */}
-                    <section id="skills" className="py-20 bg-white">
+                    <section id="skills" className="py-20 bg-gray-800">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-4xl font-bold text-center mb-4 gradient-text">Technical Skills</h2>
-                            <p className="text-center text-gray-600 mb-12 text-lg">
+                            <p className="text-center text-gray-400 mb-12 text-lg">
                                 Building with modern tools and technologies
                             </p>
                             
                             <div className="grid md:grid-cols-2 gap-8">
                                 {Object.entries(skills).map(([category, skillList]) => (
-                                    <div key={category} className="bg-gray-50 rounded-xl p-6">
-                                        <h3 className="text-xl font-bold text-gray-900 mb-4">{category}</h3>
+                                    <div key={category} className="bg-gray-900 rounded-xl p-6 border border-gray-700">
+                                        <h3 className="text-xl font-bold text-gray-100 mb-4">{category}</h3>
                                         <div className="flex flex-wrap gap-2">
                                             {skillList.map((skill, i) => (
-                                                <span key={i} className="skill-badge px-4 py-2 bg-white text-gray-700 rounded-lg shadow-sm font-medium">
+                                                <span key={i} className="skill-badge px-4 py-2 bg-gray-700 text-gray-200 rounded-lg shadow-sm font-medium">
                                                     {skill}
                                                 </span>
                                             ))}
@@ -374,17 +375,17 @@
                     </section>
 
                     {/* Contact Section */}
-                    <section id="contact" className="py-20 bg-gray-50">
+                    <section id="contact" className="py-20 bg-gray-900">
                         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                             <h2 className="text-4xl font-bold mb-4 gradient-text">Let's Connect</h2>
-                            <p className="text-xl text-gray-600 mb-8">
+                            <p className="text-xl text-gray-400 mb-8">
                                 Looking for co-op opportunities starting May 2026
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
                                 <a 
                                     href="mailto:gideonadegun@gmail.com"
-                                    className="flex items-center gap-3 text-gray-700 hover:text-indigo-600 transition text-lg"
+                                    className="flex items-center gap-3 text-gray-300 hover:text-indigo-400 transition text-lg"
                                 >
                                     <EmailIcon />
                                     gideonadegun@gmail.com
@@ -393,7 +394,7 @@
                                     href="https://github.com/ogadegun"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-3 text-gray-700 hover:text-indigo-600 transition text-lg"
+                                    className="flex items-center gap-3 text-gray-300 hover:text-indigo-400 transition text-lg"
                                 >
                                     <GithubIcon />
                                     github.com/ogadegun
@@ -411,7 +412,7 @@
                                     href="https://github.com/ogadegun"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="px-8 py-4 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-900 transition shadow-lg text-lg"
+                                    className="px-8 py-4 bg-gray-700 text-white font-medium rounded-lg hover:bg-gray-600 transition shadow-lg text-lg"
                                 >
                                     View GitHub
                                 </a>
@@ -420,10 +421,10 @@
                     </section>
 
                     {/* Footer */}
-                    <footer className="bg-gray-900 text-white py-8">
+                    <footer className="bg-gray-950 text-white py-8 border-t border-gray-800">
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                            <p className="text-gray-400">
-                                © 2025 Olu Adegun. Built with React and Tailwind CSS.
+                            <p className="text-gray-500">
+                                © 2025 Oluwaseyi Adegun. Built with React and Tailwind CSS.
                             </p>
                         </div>
                     </footer>
