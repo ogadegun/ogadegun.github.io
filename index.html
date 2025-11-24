@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oluwaseyi Adegun - Software Engineer</title>
+    <title>Olu Adegun - Software Engineer</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -13,15 +13,11 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #0a1f1a;
         }
         
         .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #f4c430 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -33,7 +29,7 @@
         
         .card-hover:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.25);
+            box-shadow: 0 12px 24px rgba(16, 185, 129, 0.25);
         }
         
         .skill-badge {
@@ -42,12 +38,32 @@
         
         .skill-badge:hover {
             transform: scale(1.05);
-            background-color: #667eea;
-            color: white;
+            background-color: #d4af37;
+            color: #0a1f1a;
         }
 
         .stat-number {
             font-variant-numeric: tabular-nums;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-deployed {
+            background-color: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
         }
     </style>
 </head>
@@ -55,9 +71,9 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState } = React;
 
-        // Icons as SVG components
+        // Icons
         const GithubIcon = () => (
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -94,14 +110,25 @@
             </svg>
         );
 
-        const Portfolio = () => {
-            const [activeSection, setActiveSection] = useState('home');
+        const RocketIcon = () => (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+        );
 
+        const BookIcon = () => (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+        );
+
+        const Portfolio = () => {
             const projects = [
                 {
                     id: 1,
                     title: "Financial Market Data Infrastructure",
                     role: "Database Operations Lead | MUN Quantitative Finance Society",
+                    status: "active",
                     icon: <DatabaseIcon />,
                     description: "Production-scale PostgreSQL infrastructure managing one of the largest student-managed financial databases.",
                     highlights: [
@@ -109,7 +136,7 @@
                         "187GB+ database covering historical data from 2015-2025",
                         "Concurrent backfill pipeline with ThreadPoolExecutor",
                         "Gap-filling algorithms ensuring 99.9% data completeness",
-                        "Migrated from DigitalOcean to Memorial Univeristy's CAIR research infrastructure"
+                        "Migrated from DigitalOcean to CAIR research infrastructure"
                     ],
                     tech: ["PostgreSQL", "Python", "psycopg2", "pandas", "ThreadPoolExecutor", "CAIR/Red Hat"],
                     metrics: [
@@ -118,12 +145,13 @@
                         { label: "Tickers", value: "13,000+" },
                         { label: "Date Range", value: "2015-2025" }
                     ],
-                    impact: "Serving quantitative research for 30+ MQS members with production-grade data infrastructure"
+                    impact: "Serving quantitative research for 50+ MQS members with production-grade data infrastructure"
                 },
                 {
                     id: 2,
                     title: "AWS Cloud Market Data Pipeline",
                     role: "Cloud Engineer | Personal Portfolio Project",
+                    status: "deployed",
                     icon: <CloudIcon />,
                     description: "Containerized stock market data pipeline demonstrating modern cloud architecture and DevOps practices.",
                     highlights: [
@@ -147,6 +175,7 @@
                     id: 3,
                     title: "Privolio - Secure Code Sharing Platform",
                     role: "Frontend Engineer | Collaborative Project",
+                    status: "deployed",
                     icon: <CodeIcon />,
                     description: "Web platform enabling secure sharing of private GitHub repositories through temporary, read-only links.",
                     highlights: [
@@ -176,20 +205,18 @@
             };
 
             return (
-                <div className="min-h-screen bg-gray-900">
+                <div className="min-h-screen" style={{backgroundColor: '#0a1f1a'}}>
                     {/* Navigation */}
-                    <nav className="fixed top-0 w-full bg-gray-800 shadow-sm z-50 border-b border-gray-700">
+                    <nav className="fixed top-0 w-full z-50 border-b" style={{backgroundColor: '#1a2f2a', borderColor: '#2d4a3d'}}>
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                            <div className="flex justify-between items-center h-16">
-                                <div className="flex items-center">
-                                    <span className="text-xl font-bold gradient-text">Oluwaseyi Adegun</span>
-                                </div>
+                            <div className="flex justify-end items-center h-16">
                                 <div className="hidden md:flex space-x-8">
-                                    <a href="#home" className="text-gray-300 hover:text-indigo-400 transition">Home</a>
-                                    <a href="#about" className="text-gray-300 hover:text-indigo-400 transition">About</a>
-                                    <a href="#projects" className="text-gray-300 hover:text-indigo-400 transition">Projects</a>
-                                    <a href="#skills" className="text-gray-300 hover:text-indigo-400 transition">Skills</a>
-                                    <a href="#contact" className="text-gray-300 hover:text-indigo-400 transition">Contact</a>
+                                    <a href="#home" className="text-gray-300 hover:text-yellow-400 transition">Home</a>
+                                    <a href="#about" className="text-gray-300 hover:text-yellow-400 transition">About</a>
+                                    <a href="#currently" className="text-gray-300 hover:text-yellow-400 transition">Currently</a>
+                                    <a href="#projects" className="text-gray-300 hover:text-yellow-400 transition">Projects</a>
+                                    <a href="#skills" className="text-gray-300 hover:text-yellow-400 transition">Skills</a>
+                                    <a href="#contact" className="text-gray-300 hover:text-yellow-400 transition">Contact</a>
                                 </div>
                             </div>
                         </div>
@@ -199,16 +226,19 @@
                     <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
                         <div className="max-w-6xl mx-auto">
                             <div className="text-center">
-                                <h1 className="text-5xl md:text-6xl font-bold text-gray-100 mb-6">
+                                <h1 className="text-5xl md:text-6xl font-bold mb-6" style={{color: '#e8f5e9'}}>
                                     Hi, I'm <span className="gradient-text">Olu</span>
                                 </h1>
-                                <p className="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl mx-auto">
+                                <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" style={{color: '#c5e1bc'}}>
                                     Third-year Computer Science student specializing in data infrastructure and cloud computing. I love building reliable systems.
                                 </p>
                                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                                     <a 
                                         href="mailto:gideonadegun@gmail.com"
-                                        className="inline-flex items-center gap-2 px-8 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition shadow-lg"
+                                        className="inline-flex items-center gap-2 px-8 py-3 font-medium rounded-lg transition shadow-lg"
+                                        style={{backgroundColor: '#d4af37', color: '#0a1f1a'}}
+                                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f4c430'}
+                                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#d4af37'}
                                     >
                                         <EmailIcon />
                                         Get In Touch
@@ -217,7 +247,10 @@
                                         href="https://github.com/ogadegun"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-2 px-8 py-3 bg-gray-700 text-white font-medium rounded-lg hover:bg-gray-600 transition shadow-lg"
+                                        className="inline-flex items-center gap-2 px-8 py-3 font-medium rounded-lg transition shadow-lg"
+                                        style={{backgroundColor: '#2d4a3d', color: '#e8f5e9'}}
+                                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#3d5a4d'}
+                                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#2d4a3d'}
                                     >
                                         <GithubIcon />
                                         View GitHub
@@ -228,67 +261,100 @@
                     </section>
 
                     {/* About Section */}
-                    <section id="about" className="py-20 bg-gray-800">
+                    <section id="about" className="py-20" style={{backgroundColor: '#1a2f2a'}}>
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-4xl font-bold text-center mb-12 gradient-text">About Me</h2>
                             <div className="max-w-3xl mx-auto">
-                                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                                <p className="text-lg mb-6 leading-relaxed" style={{color: '#c5e1bc'}}>
                                     I'm a Computer Science student at Memorial University of Newfoundland pursuing the 
-                                    Data-centric Computing concentration. Currently applying for the co-op program with 
-                                    an 8-month work term starting May 2026.
+                                    Data-centric Computing concentration.
                                 </p>
-                                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                                    As Database Infrastructure Lead for the MUN Quantitative Finance Society, I manage 
+                                <p className="text-lg mb-6 leading-relaxed" style={{color: '#c5e1bc'}}>
+                                    As Database Operations Lead for the MUN Quantitative Finance Society, I manage 
                                     production-scale financial market data infrastructure that has grown to over 1 billion 
                                     rows across 13,000+ tickers. This involves coordinating with university research 
                                     computing staff and leading technical initiatives that serve 50+ society members.
                                 </p>
-                                <p className="text-lg text-gray-300 leading-relaxed">
-                                    I'm passionate about building scalable, reliable systems and solving complex data 
-                                    infrastructure challenges. My experience spans cloud computing, database administration, 
-                                    and full-stack development.
+                                <p className="text-lg leading-relaxed" style={{color: '#c5e1bc'}}>
+                                    When I'm not managing production databases, you'll find me buried in a book. I'm an avid reader 
+                                    of everything except self-help books and romance novels (although I might be biased 
+                                    towards epic fantasy). I'm passionate about building reliable systems and 
+                                    solving complex data infrastructure challenges.
                                 </p>
                             </div>
                         </div>
                     </section>
 
+                    {/* Currently Section */}
+                    <section id="currently" className="py-20" style={{backgroundColor: '#0a1f1a'}}>
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="max-w-3xl mx-auto">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <RocketIcon />
+                                    <h2 className="text-3xl font-bold gradient-text">Currently Working On</h2>
+                                </div>
+                                <div className="rounded-xl p-6 border" style={{backgroundColor: '#1a2f2a', borderColor: '#2d4a3d'}}>
+                                    <ul className="space-y-4">
+                                        <li className="flex items-start gap-3" style={{color: '#c5e1bc'}}>
+                                            <span className="text-yellow-400 mt-1">•</span>
+                                            <span>Preparing for <strong style={{color: '#d4af37'}}>AWS Cloud Practitioner Certification</strong></span>
+                                        </li>
+                                        <li className="flex items-start gap-3" style={{color: '#c5e1bc'}}>
+                                            <span className="text-yellow-400 mt-1">•</span>
+                                            <span>Building <strong style={{color: '#d4af37'}}>CI/CD pipelines</strong> for MQSMaster database infrastructure</span>
+                                        </li>
+                                        <li className="flex items-start gap-3" style={{color: '#c5e1bc'}}>
+                                            <span className="text-yellow-400 mt-1">•</span>
+                                            <span>Expanding market data coverage to <strong style={{color: '#d4af37'}}>2015-2019</strong> (historical backfill in progress)</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     {/* Projects Section */}
-                    <section id="projects" className="py-20 bg-gray-900">
+                    <section id="projects" className="py-20" style={{backgroundColor: '#1a2f2a'}}>
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-4xl font-bold text-center mb-4 gradient-text">Featured Projects</h2>
-                            <p className="text-center text-gray-400 mb-12 text-lg">
+                            <p className="text-center mb-12 text-lg" style={{color: '#c5e1bc'}}>
                                 Building production-grade systems with real-world impact
                             </p>
                             
                             <div className="space-y-8">
-                                {projects.map((project, idx) => (
-                                    <div key={project.id} className="bg-gray-800 rounded-xl shadow-md card-hover p-8 border border-gray-700">
+                                {projects.map((project) => (
+                                    <div key={project.id} className="rounded-xl shadow-md card-hover p-8 border" style={{backgroundColor: '#1e3a32', borderColor: '#2d4a3d'}}>
                                         <div className="flex items-start gap-4 mb-4">
-                                            <div className="p-3 bg-indigo-900 rounded-lg text-indigo-400">
+                                            <div className="p-3 rounded-lg" style={{backgroundColor: '#d4af37', color: '#0a1f1a'}}>
                                                 {project.icon}
                                             </div>
                                             <div className="flex-1">
-                                                <h3 className="text-2xl font-bold text-gray-100 mb-2">
-                                                    {project.title}
-                                                </h3>
-                                                <p className="text-sm text-indigo-400 font-medium mb-3">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <h3 className="text-2xl font-bold" style={{color: '#e8f5e9'}}>
+                                                        {project.title}
+                                                    </h3>
+                                                    <span className={`status-badge status-${project.status}`}>
+                                                        {project.status === 'active' ? '🟢 Active' : '✅ Deployed'}
+                                                    </span>
+                                                </div>
+                                                <p className="text-sm font-medium mb-3" style={{color: '#d4af37'}}>
                                                     {project.role}
                                                 </p>
                                             </div>
                                         </div>
                                         
-                                        <p className="text-gray-300 mb-6 leading-relaxed">
+                                        <p className="mb-6 leading-relaxed" style={{color: '#c5e1bc'}}>
                                             {project.description}
                                         </p>
 
                                         {/* Metrics */}
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 p-4 bg-gray-900 rounded-lg border border-gray-700">
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 p-4 rounded-lg border" style={{backgroundColor: '#0a1f1a', borderColor: '#2d4a3d'}}>
                                             {project.metrics.map((metric, i) => (
                                                 <div key={i} className="text-center">
-                                                    <div className="text-2xl font-bold text-indigo-400 stat-number">
+                                                    <div className="text-2xl font-bold stat-number" style={{color: '#d4af37'}}>
                                                         {metric.value}
                                                     </div>
-                                                    <div className="text-xs text-gray-500 mt-1">
+                                                    <div className="text-xs mt-1" style={{color: '#7a9985'}}>
                                                         {metric.label}
                                                     </div>
                                                 </div>
@@ -297,11 +363,11 @@
 
                                         {/* Highlights */}
                                         <div className="mb-6">
-                                            <h4 className="font-semibold text-gray-100 mb-3">Key Achievements:</h4>
+                                            <h4 className="font-semibold mb-3" style={{color: '#e8f5e9'}}>Key Achievements:</h4>
                                             <ul className="space-y-2">
                                                 {project.highlights.map((highlight, i) => (
-                                                    <li key={i} className="flex items-start gap-2 text-gray-300">
-                                                        <span className="text-indigo-400 mt-1">•</span>
+                                                    <li key={i} className="flex items-start gap-2" style={{color: '#c5e1bc'}}>
+                                                        <span className="mt-1" style={{color: '#d4af37'}}>•</span>
                                                         <span>{highlight}</span>
                                                     </li>
                                                 ))}
@@ -310,10 +376,10 @@
 
                                         {/* Tech Stack */}
                                         <div className="mb-4">
-                                            <h4 className="font-semibold text-gray-100 mb-3">Technologies:</h4>
+                                            <h4 className="font-semibold mb-3" style={{color: '#e8f5e9'}}>Technologies:</h4>
                                             <div className="flex flex-wrap gap-2">
                                                 {project.tech.map((tech, i) => (
-                                                    <span key={i} className="px-3 py-1 bg-indigo-900 text-indigo-300 text-sm rounded-full">
+                                                    <span key={i} className="px-3 py-1 text-sm rounded-full" style={{backgroundColor: '#2d4a3d', color: '#d4af37'}}>
                                                         {tech}
                                                     </span>
                                                 ))}
@@ -321,9 +387,9 @@
                                         </div>
 
                                         {/* Impact */}
-                                        <div className="p-4 bg-indigo-900 bg-opacity-30 rounded-lg border-l-4 border-indigo-600">
-                                            <p className="text-gray-300">
-                                                <span className="font-semibold text-indigo-400">Impact: </span>
+                                        <div className="p-4 rounded-lg border-l-4" style={{backgroundColor: 'rgba(212, 175, 55, 0.1)', borderColor: '#d4af37'}}>
+                                            <p style={{color: '#c5e1bc'}}>
+                                                <span className="font-semibold" style={{color: '#d4af37'}}>Impact: </span>
                                                 {project.impact}
                                             </p>
                                         </div>
@@ -335,7 +401,10 @@
                                                     href={project.github}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 font-medium transition"
+                                                    className="inline-flex items-center gap-2 font-medium transition"
+                                                    style={{color: '#d4af37'}}
+                                                    onMouseOver={(e) => e.currentTarget.style.color = '#f4c430'}
+                                                    onMouseOut={(e) => e.currentTarget.style.color = '#d4af37'}
                                                 >
                                                     <GithubIcon />
                                                     View on GitHub
@@ -350,20 +419,20 @@
                     </section>
 
                     {/* Skills Section */}
-                    <section id="skills" className="py-20 bg-gray-800">
+                    <section id="skills" className="py-20" style={{backgroundColor: '#0a1f1a'}}>
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                             <h2 className="text-4xl font-bold text-center mb-4 gradient-text">Technical Skills</h2>
-                            <p className="text-center text-gray-400 mb-12 text-lg">
+                            <p className="text-center mb-12 text-lg" style={{color: '#c5e1bc'}}>
                                 Building with modern tools and technologies
                             </p>
                             
                             <div className="grid md:grid-cols-2 gap-8">
                                 {Object.entries(skills).map(([category, skillList]) => (
-                                    <div key={category} className="bg-gray-900 rounded-xl p-6 border border-gray-700">
-                                        <h3 className="text-xl font-bold text-gray-100 mb-4">{category}</h3>
+                                    <div key={category} className="rounded-xl p-6 border" style={{backgroundColor: '#1a2f2a', borderColor: '#2d4a3d'}}>
+                                        <h3 className="text-xl font-bold mb-4" style={{color: '#e8f5e9'}}>{category}</h3>
                                         <div className="flex flex-wrap gap-2">
                                             {skillList.map((skill, i) => (
-                                                <span key={i} className="skill-badge px-4 py-2 bg-gray-700 text-gray-200 rounded-lg shadow-sm font-medium">
+                                                <span key={i} className="skill-badge px-4 py-2 rounded-lg shadow-sm font-medium" style={{backgroundColor: '#2d4a3d', color: '#c5e1bc'}}>
                                                     {skill}
                                                 </span>
                                             ))}
@@ -374,18 +443,44 @@
                         </div>
                     </section>
 
+                    {/* Beyond Code Section */}
+                    <section className="py-12" style={{backgroundColor: '#1a2f2a'}}>
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="max-w-3xl mx-auto text-center">
+                                <div className="flex items-center justify-center gap-2 mb-4">
+                                    <BookIcon />
+                                    <h3 className="text-2xl font-bold gradient-text">Beyond Code</h3>
+                                </div>
+                                <div className="flex flex-wrap justify-center gap-4">
+                                    <span className="px-4 py-2 rounded-lg" style={{backgroundColor: '#2d4a3d', color: '#c5e1bc'}}>
+                                        📚 Avid reader (fantasy, sci-fi, tech)
+                                    </span>
+                                    <span className="px-4 py-2 rounded-lg" style={{backgroundColor: '#2d4a3d', color: '#c5e1bc'}}>
+                                        ☁️ Cloud architecture enthusiast
+                                    </span>
+                                    <span className="px-4 py-2 rounded-lg" style={{backgroundColor: '#2d4a3d', color: '#c5e1bc'}}>
+                                        🎯 AWS certification in progress
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     {/* Contact Section */}
-                    <section id="contact" className="py-20 bg-gray-900">
+                    <section id="contact" className="py-20" style={{backgroundColor: '#0a1f1a'}}>
                         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                             <h2 className="text-4xl font-bold mb-4 gradient-text">Let's Connect</h2>
-                            <p className="text-xl text-gray-400 mb-8">
+                            <p className="text-xl mb-8" style={{color: '#c5e1bc'}}>
                                 Looking for co-op opportunities starting May 2026
                             </p>
                             
                             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
                                 <a 
                                     href="mailto:gideonadegun@gmail.com"
-                                    className="flex items-center gap-3 text-gray-300 hover:text-indigo-400 transition text-lg"
+                                    className="flex items-center gap-3 text-lg transition"
+                                    style={{color: '#c5e1bc'}}
+                                    onMouseOver={(e) => e.currentTarget.style.color = '#d4af37'}
+                                    onMouseOut={(e) => e.currentTarget.style.color = '#c5e1bc'}
                                 >
                                     <EmailIcon />
                                     gideonadegun@gmail.com
@@ -394,7 +489,10 @@
                                     href="https://github.com/ogadegun"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-3 text-gray-300 hover:text-indigo-400 transition text-lg"
+                                    className="flex items-center gap-3 text-lg transition"
+                                    style={{color: '#c5e1bc'}}
+                                    onMouseOver={(e) => e.currentTarget.style.color = '#d4af37'}
+                                    onMouseOut={(e) => e.currentTarget.style.color = '#c5e1bc'}
                                 >
                                     <GithubIcon />
                                     github.com/ogadegun
@@ -404,7 +502,10 @@
                             <div className="inline-flex gap-4">
                                 <a 
                                     href="mailto:gideonadegun@gmail.com"
-                                    className="px-8 py-4 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition shadow-lg text-lg"
+                                    className="px-8 py-4 font-medium rounded-lg transition shadow-lg text-lg"
+                                    style={{backgroundColor: '#d4af37', color: '#0a1f1a'}}
+                                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#f4c430'}
+                                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#d4af37'}
                                 >
                                     Email Me
                                 </a>
@@ -412,7 +513,10 @@
                                     href="https://github.com/ogadegun"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="px-8 py-4 bg-gray-700 text-white font-medium rounded-lg hover:bg-gray-600 transition shadow-lg text-lg"
+                                    className="px-8 py-4 font-medium rounded-lg transition shadow-lg text-lg"
+                                    style={{backgroundColor: '#2d4a3d', color: '#e8f5e9'}}
+                                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#3d5a4d'}
+                                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#2d4a3d'}
                                 >
                                     View GitHub
                                 </a>
@@ -421,10 +525,10 @@
                     </section>
 
                     {/* Footer */}
-                    <footer className="bg-gray-950 text-white py-8 border-t border-gray-800">
+                    <footer className="py-8 border-t" style={{backgroundColor: '#0f1f1a', borderColor: '#2d4a3d'}}>
                         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                            <p className="text-gray-500">
-                                © 2025 Oluwaseyi Adegun. Built with React and Tailwind CSS.
+                            <p style={{color: '#7a9985'}}>
+                                © 2025 Oluwaseyi Adegun. Built with React, Tailwind
                             </p>
                         </div>
                     </footer>
