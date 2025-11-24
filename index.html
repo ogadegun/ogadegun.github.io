@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olu Adegun - Software Engineer</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+        }
+        
+        .skill-badge {
+            transition: all 0.2s ease;
+        }
+        
+        .skill-badge:hover {
+            transform: scale(1.05);
+            background-color: #667eea;
+            color: white;
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Icons as SVG components
+        const GithubIcon = () => (
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+        );
+
+        const EmailIcon = () => (
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+        );
+
+        const ExternalLinkIcon = () => (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+        );
+
+        const DatabaseIcon = () => (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+            </svg>
+        );
+
+        const CloudIcon = () => (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+            </svg>
+        );
+
+        const CodeIcon = () => (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+        );
+
+        const Portfolio = () => {
+            const [activeSection, setActiveSection] = useState('home');
+
+            const projects = [
+                {
+                    id: 1,
+                    title: "Financial Market Data Infrastructure",
+                    role: "Database Infrastructure Lead | MUN Quantitative Finance Society",
+                    icon: <DatabaseIcon />,
+                    description: "Production-scale PostgreSQL infrastructure managing one of the largest student-managed financial databases.",
+                    highlights: [
+                        "1.7 billion+ rows of market data across 13,000+ tickers",
+                        "187GB+ database covering historical data from 2015-2025",
+                        "Concurrent backfill pipeline with ThreadPoolExecutor",
+                        "Gap-filling algorithms ensuring 99.9% data completeness",
+                        "Migrated from DigitalOcean to CAIR research infrastructure"
+                    ],
+                    tech: ["PostgreSQL", "Python", "psycopg2", "pandas", "ThreadPoolExecutor", "CAIR/Red Hat"],
+                    metrics: [
+                        { label: "Database Size", value: "187GB+" },
+                        { label: "Total Rows", value: "1.7B+" },
+                        { label: "Tickers", value: "13,000+" },
+                        { label: "Date Range", value: "2015-2025" }
+                    ],
+                    impact: "Serving quantitative research for 50+ MQS members with production-grade data infrastructure"
+                },
+                {
+                    id: 2,
+                    title: "AWS Cloud Market Data Pipeline",
+                    role: "Cloud Engineer | Personal Portfolio Project",
+                    icon: <CloudIcon />,
+                    description: "Containerized stock market data pipeline demonstrating modern cloud architecture and DevOps practices.",
+                    highlights: [
+                        "86,000+ rows processed via ECS Fargate serverless deployment",
+                        "Docker containerization with multi-stage builds",
+                        "AWS infrastructure: RDS, EC2, ECS, ECR, CloudWatch",
+                        "IAM roles and security group configuration",
+                        "Automated CloudWatch monitoring and logging"
+                    ],
+                    tech: ["Docker", "AWS ECS Fargate", "AWS RDS", "Python", "PostgreSQL", "CloudWatch", "ECR"],
+                    metrics: [
+                        { label: "Rows Processed", value: "86K+" },
+                        { label: "Tickers", value: "50" },
+                        { label: "Container Size", value: "52MB" },
+                        { label: "Response Time", value: "<100ms" }
+                    ],
+                    impact: "Demonstrated cloud-native architecture with serverless orchestration",
+                    github: "https://github.com/ogadegun/market-data-pipeline"
+                },
+                {
+                    id: 3,
+                    title: "Privolio - Secure Code Sharing Platform",
+                    role: "Frontend Engineer | Collaborative Project",
+                    icon: <CodeIcon />,
+                    description: "Web platform enabling secure sharing of private GitHub repositories through temporary, read-only links.",
+                    highlights: [
+                        "4,600+ lines of TypeScript/React code",
+                        "GitHub OAuth authentication with NextAuth.js",
+                        "Monaco Editor integration for code viewing",
+                        "Expiration controls and view limits",
+                        "File tree navigation with syntax highlighting"
+                    ],
+                    tech: ["Next.js 14", "TypeScript", "React", "Tailwind CSS", "Monaco Editor", "NextAuth.js"],
+                    metrics: [
+                        { label: "Lines of Code", value: "4,600+" },
+                        { label: "Components", value: "17+" },
+                        { label: "Pages", value: "8" },
+                        { label: "Languages Supported", value: "20+" }
+                    ],
+                    impact: "Production-ready platform for secure portfolio sharing and recruiter access"
+                }
+            ];
+
+            const skills = {
+                "Cloud & Infrastructure": ["AWS (ECS, RDS, EC2, ECR, CloudWatch, IAM)", "Docker", "PostgreSQL", "Infrastructure as Code"],
+                "Programming": ["Python", "TypeScript", "JavaScript", "SQL", "Bash"],
+                "Data Engineering": ["pandas", "psycopg2", "Concurrent Processing", "Database Design", "API Integration"],
+                "DevOps": ["Git/GitHub", "CI/CD Concepts", "Container Orchestration", "Monitoring & Logging"],
+                "Frontend": ["React", "Next.js", "Tailwind CSS", "TypeScript"]
+            };
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Navigation */}
+                    <nav className="fixed top-0 w-full bg-white shadow-sm z-50">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex justify-between items-center h-16">
+                                <div className="flex items-center">
+                                    <span className="text-xl font-bold gradient-text">Olu Adegun</span>
+                                </div>
+                                <div className="hidden md:flex space-x-8">
+                                    <a href="#home" className="text-gray-700 hover:text-indigo-600 transition">Home</a>
+                                    <a href="#about" className="text-gray-700 hover:text-indigo-600 transition">About</a>
+                                    <a href="#projects" className="text-gray-700 hover:text-indigo-600 transition">Projects</a>
+                                    <a href="#skills" className="text-gray-700 hover:text-indigo-600 transition">Skills</a>
+                                    <a href="#contact" className="text-gray-700 hover:text-indigo-600 transition">Contact</a>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {/* Hero Section */}
+                    <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+                        <div className="max-w-6xl mx-auto">
+                            <div className="text-center">
+                                <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+                                    Hi, I'm <span className="gradient-text">Olu Adegun</span>
+                                </h1>
+                                <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                                    Third-year Computer Science student specializing in data infrastructure and cloud computing. I love building reliable systems.
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                    <a 
+                                        href="mailto:gideonadegun@gmail.com"
+                                        className="inline-flex items-center gap-2 px-8 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition shadow-lg"
+                                    >
+                                        <EmailIcon />
+                                        Get In Touch
+                                    </a>
+                                    <a 
+                                        href="https://github.com/ogadegun"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 px-8 py-3 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-900 transition shadow-lg"
+                                    >
+                                        <GithubIcon />
+                                        View GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* About Section */}
+                    <section id="about" className="py-20 bg-white">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-4xl font-bold text-center mb-12 gradient-text">About Me</h2>
+                            <div className="max-w-3xl mx-auto">
+                                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                                    I'm a Computer Science student at Memorial University of Newfoundland pursuing the 
+                                    Data-centric Computing concentration. Currently applying for the co-op program with 
+                                    an 8-month work term starting May 2026.
+                                </p>
+                                <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+                                    As Database Infrastructure Lead for the MUN Quantitative Finance Society, I manage 
+                                    production-scale financial market data infrastructure that has grown to over 1 billion 
+                                    rows across 13,000+ tickers. This involves coordinating with university research 
+                                    computing staff and leading technical initiatives that serve 50+ society members.
+                                </p>
+                                <p className="text-lg text-gray-700 leading-relaxed">
+                                    I'm passionate about building scalable, reliable systems and solving complex data 
+                                    infrastructure challenges. My experience spans cloud computing, database administration, 
+                                    and full-stack development.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Projects Section */}
+                    <section id="projects" className="py-20 bg-gray-50">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-4xl font-bold text-center mb-4 gradient-text">Featured Projects</h2>
+                            <p className="text-center text-gray-600 mb-12 text-lg">
+                                Building production-grade systems with real-world impact
+                            </p>
+                            
+                            <div className="space-y-8">
+                                {projects.map((project, idx) => (
+                                    <div key={project.id} className="bg-white rounded-xl shadow-md card-hover p-8">
+                                        <div className="flex items-start gap-4 mb-4">
+                                            <div className="p-3 bg-indigo-100 rounded-lg text-indigo-600">
+                                                {project.icon}
+                                            </div>
+                                            <div className="flex-1">
+                                                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                                                    {project.title}
+                                                </h3>
+                                                <p className="text-sm text-indigo-600 font-medium mb-3">
+                                                    {project.role}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        
+                                        <p className="text-gray-700 mb-6 leading-relaxed">
+                                            {project.description}
+                                        </p>
+
+                                        {/* Metrics */}
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
+                                            {project.metrics.map((metric, i) => (
+                                                <div key={i} className="text-center">
+                                                    <div className="text-2xl font-bold text-indigo-600 stat-number">
+                                                        {metric.value}
+                                                    </div>
+                                                    <div className="text-xs text-gray-600 mt-1">
+                                                        {metric.label}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* Highlights */}
+                                        <div className="mb-6">
+                                            <h4 className="font-semibold text-gray-900 mb-3">Key Achievements:</h4>
+                                            <ul className="space-y-2">
+                                                {project.highlights.map((highlight, i) => (
+                                                    <li key={i} className="flex items-start gap-2 text-gray-700">
+                                                        <span className="text-indigo-600 mt-1">•</span>
+                                                        <span>{highlight}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+
+                                        {/* Tech Stack */}
+                                        <div className="mb-4">
+                                            <h4 className="font-semibold text-gray-900 mb-3">Technologies:</h4>
+                                            <div className="flex flex-wrap gap-2">
+                                                {project.tech.map((tech, i) => (
+                                                    <span key={i} className="px-3 py-1 bg-indigo-50 text-indigo-700 text-sm rounded-full">
+                                                        {tech}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+
+                                        {/* Impact */}
+                                        <div className="p-4 bg-indigo-50 rounded-lg border-l-4 border-indigo-600">
+                                            <p className="text-gray-700">
+                                                <span className="font-semibold text-indigo-900">Impact: </span>
+                                                {project.impact}
+                                            </p>
+                                        </div>
+
+                                        {/* GitHub Link */}
+                                        {project.github && (
+                                            <div className="mt-4">
+                                                <a 
+                                                    href={project.github}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-800 font-medium transition"
+                                                >
+                                                    <GithubIcon />
+                                                    View on GitHub
+                                                    <ExternalLinkIcon />
+                                                </a>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Skills Section */}
+                    <section id="skills" className="py-20 bg-white">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-4xl font-bold text-center mb-4 gradient-text">Technical Skills</h2>
+                            <p className="text-center text-gray-600 mb-12 text-lg">
+                                Building with modern tools and technologies
+                            </p>
+                            
+                            <div className="grid md:grid-cols-2 gap-8">
+                                {Object.entries(skills).map(([category, skillList]) => (
+                                    <div key={category} className="bg-gray-50 rounded-xl p-6">
+                                        <h3 className="text-xl font-bold text-gray-900 mb-4">{category}</h3>
+                                        <div className="flex flex-wrap gap-2">
+                                            {skillList.map((skill, i) => (
+                                                <span key={i} className="skill-badge px-4 py-2 bg-white text-gray-700 rounded-lg shadow-sm font-medium">
+                                                    {skill}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Contact Section */}
+                    <section id="contact" className="py-20 bg-gray-50">
+                        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                            <h2 className="text-4xl font-bold mb-4 gradient-text">Let's Connect</h2>
+                            <p className="text-xl text-gray-600 mb-8">
+                                Looking for co-op opportunities starting May 2026
+                            </p>
+                            
+                            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                                <a 
+                                    href="mailto:gideonadegun@gmail.com"
+                                    className="flex items-center gap-3 text-gray-700 hover:text-indigo-600 transition text-lg"
+                                >
+                                    <EmailIcon />
+                                    gideonadegun@gmail.com
+                                </a>
+                                <a 
+                                    href="https://github.com/ogadegun"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-3 text-gray-700 hover:text-indigo-600 transition text-lg"
+                                >
+                                    <GithubIcon />
+                                    github.com/ogadegun
+                                </a>
+                            </div>
+
+                            <div className="inline-flex gap-4">
+                                <a 
+                                    href="mailto:gideonadegun@gmail.com"
+                                    className="px-8 py-4 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition shadow-lg text-lg"
+                                >
+                                    Email Me
+                                </a>
+                                <a 
+                                    href="https://github.com/ogadegun"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-8 py-4 bg-gray-800 text-white font-medium rounded-lg hover:bg-gray-900 transition shadow-lg text-lg"
+                                >
+                                    View GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="bg-gray-900 text-white py-8">
+                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                            <p className="text-gray-400">
+                                © 2025 Olu Adegun. Built with React and Tailwind CSS.
+                            </p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<Portfolio />, document.getElementById('root'));
+    </script>
+</body>
+</html>
