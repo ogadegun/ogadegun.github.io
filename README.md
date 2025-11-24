@@ -1,4 +1,4 @@
-# Olu Adegun - Portfolio Website
+# Oluwaseyi Adegun - Portfolio Website
 
 Professional portfolio showcasing cloud infrastructure, data engineering, and full-stack development projects.
 
